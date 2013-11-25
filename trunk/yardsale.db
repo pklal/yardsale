@@ -1,0 +1,157 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               5.5.28-log - MySQL Community Server (GPL)
+-- Server OS:                    Win32
+-- HeidiSQL Version:             8.1.0.4545
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Dumping database structure for yardsaledb
+DROP DATABASE IF EXISTS `yardsaledb`;
+CREATE DATABASE IF NOT EXISTS `yardsaledb` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `yardsaledb`;
+
+
+-- Dumping structure for table yardsaledb.seq_gen
+CREATE TABLE IF NOT EXISTS `seq_gen` (
+  `ID_NAM` varchar(50) DEFAULT NULL,
+  `ID_VAL` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_code
+CREATE TABLE IF NOT EXISTS `ys_mst_code` (
+  `code_id` bigint(18) DEFAULT NULL,
+  `code_key` varchar(50) DEFAULT NULL,
+  `code_val` varchar(50) DEFAULT NULL,
+  `code_desc` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This is for list of values for any code\r\n';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_item
+CREATE TABLE IF NOT EXISTS `ys_mst_item` (
+  `item_id` bigint(18) NOT NULL,
+  `item_code` varchar(25) NOT NULL,
+  `item_name` varchar(200) DEFAULT NULL,
+  `item_desc` varchar(400) DEFAULT NULL,
+  UNIQUE KEY `item_un` (`item_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This contains the top list of items which can be entered in the application.';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_item_attributes
+CREATE TABLE IF NOT EXISTS `ys_mst_item_attributes` (
+  `item_attrib_id` bigint(18) NOT NULL,
+  `item_code` varchar(50) NOT NULL,
+  `subitem_code` varchar(50) DEFAULT NULL,
+  `attrib_code` varchar(50) DEFAULT NULL,
+  `attrib_name` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This list down any special item attributes which can be used to capture additional data';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_location
+CREATE TABLE IF NOT EXISTS `ys_mst_location` (
+  `location_id` bigint(18) DEFAULT NULL,
+  `location_code` varchar(100) DEFAULT NULL,
+  `country_code` varchar(3) DEFAULT NULL,
+  `state_code` varchar(100) DEFAULT NULL,
+  `district_code` varchar(100) DEFAULT NULL,
+  `street_code` varchar(100) DEFAULT NULL,
+  `post_code` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='location master';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_subitem
+CREATE TABLE IF NOT EXISTS `ys_mst_subitem` (
+  `ys_subitem_id` bigint(18) DEFAULT NULL,
+  `ys_item_code` varchar(50) DEFAULT NULL,
+  `ys_subitem_code` varchar(50) DEFAULT NULL,
+  `ys_subitem_name` varchar(200) DEFAULT NULL,
+  `ys_subitem_desc` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='this contains the details of subitem for the item master\r\n';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_mst_usr
+CREATE TABLE IF NOT EXISTS `ys_mst_usr` (
+  `usr_id` bigint(18) NOT NULL,
+  `usr_code` varchar(50) NOT NULL,
+  `usr_name` varchar(200) DEFAULT NULL,
+  `email_id` varchar(200) DEFAULT NULL,
+  `phone_num` varchar(15) DEFAULT NULL,
+  `password` varchar(300) DEFAULT NULL COMMENT 'store one way encryption',
+  `location_code` varchar(100) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`usr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='user master';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_post_attrib_values
+CREATE TABLE IF NOT EXISTS `ys_post_attrib_values` (
+  `post_attrib_id` bigint(18) NOT NULL,
+  `post_id` bigint(18) NOT NULL,
+  `attrib_code` varchar(50) DEFAULT NULL,
+  `attrib_val` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='this stores the attribute properties for this item/sub item';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_trn_post
+CREATE TABLE IF NOT EXISTS `ys_trn_post` (
+  `post_id` bigint(18) NOT NULL,
+  `created_date` datetime NOT NULL,
+  `usr_code` varchar(50) DEFAULT NULL COMMENT 'should come from ys_mst_usr',
+  `item_code` varchar(50) NOT NULL,
+  `subitem_code` varchar(50) DEFAULT NULL,
+  `location_code` varchar(100) DEFAULT NULL,
+  `location_desc` varchar(1000) DEFAULT NULL,
+  `post_title` varchar(1000) NOT NULL,
+  `dtl_desc` varchar(4000) NOT NULL,
+  `post_type` varchar(4000) NOT NULL COMMENT 'Buy or Sell',
+  `modified_date` varchar(4000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This table holds all the transaction details posted by users\r\n';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_trn_post_attachments
+CREATE TABLE IF NOT EXISTS `ys_trn_post_attachments` (
+  `post_attach_id` bigint(18) DEFAULT NULL,
+  `post_id` bigint(18) DEFAULT NULL,
+  `attach_name` varchar(200) DEFAULT NULL,
+  `attachment_obj` blob
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='post related attachments';
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table yardsaledb.ys_trn_post_comments
+CREATE TABLE IF NOT EXISTS `ys_trn_post_comments` (
+  `post_cmnts_id` bigint(18) DEFAULT NULL,
+  `post_id` bigint(18) DEFAULT NULL,
+  `usr_code` varchar(50) DEFAULT NULL,
+  `comment_desc` varchar(1000) DEFAULT NULL,
+  `posted_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='comments for a particular post';
+
+-- Data exporting was unselected.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
