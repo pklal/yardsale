@@ -3,10 +3,13 @@
  */
 package com.light.yardsale.transaction.service.impl;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.light.yardsale.transaction.entity.PostTransaction;
 import com.light.yardsale.transaction.exceptions.ValidationException;
+import com.light.yardsale.transaction.repository.PostTransactionRepository;
 import com.light.yardsale.transaction.services.TransactionService;
 import com.light.yardsale.transaction.transferobjects.PostRequestSO;
 
@@ -18,7 +21,7 @@ import com.light.yardsale.transaction.transferobjects.PostRequestSO;
 public class TransactionServiceImpl implements TransactionService{
 
 	@Autowired
-	
+	PostTransactionRepository postRepository;
 	/**
 	 * 
 	 */
@@ -29,8 +32,11 @@ public class TransactionServiceImpl implements TransactionService{
 	@Override
 	public PostRequestSO submitPost(PostRequestSO postRequestSO)
 			throws ValidationException {
-		// TODO Auto-generated method stub
-		return null;
+		PostTransaction trans = new PostTransaction();
+		BeanUtils.copyProperties(postRequestSO, trans);
+		postRepository.save(trans);
+		postRequestSO.setPostId(trans.getPostId());
+		return postRequestSO;
 	}
 
 }
