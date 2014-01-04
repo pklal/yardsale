@@ -1,7 +1,9 @@
 package com.light.yardsale.transaction.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,13 +16,17 @@ import java.util.Date;
 @Table(name="ys_trn_post_comments")
 @NamedQuery(name="PostComment.findAll", query="SELECT p FROM PostComment p")
 public class PostComment  {
-	private static final long serialVersionUID = 1L;
 
+	
+	
 	@Column(name="comment_desc")
-	private BigDecimal commentDescription;
+	private String commentDescription;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="InvTab")
+	@TableGenerator(name="InvTab", table="seq_gen",
+    pkColumnName="ID_NAME", valueColumnName="ID_VAL",
+    pkColumnValue="post_cmnts_id")
 	@Column(name="post_cmnts_id")
 	private Long postCmntsId;
 
@@ -37,11 +43,11 @@ public class PostComment  {
 	public PostComment() {
 	}
 
-	public BigDecimal getCommentDescription() {
+	public String getCommentDescription() {
 		return this.commentDescription;
 	}
 
-	public void setCommentDescription(BigDecimal commentDescription) {
+	public void setCommentDescription(String commentDescription) {
 		this.commentDescription = commentDescription;
 	}
 

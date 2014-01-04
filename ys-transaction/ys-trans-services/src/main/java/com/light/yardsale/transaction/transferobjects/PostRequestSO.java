@@ -4,6 +4,7 @@
 package com.light.yardsale.transaction.transferobjects;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author kiranlal
@@ -36,8 +37,17 @@ public class PostRequestSO {
 	private String subitemCode;
 
 	private String userCode;
-
 	
+	private List<AttributeSO> attributes;
+	
+	public List<AttributeSO> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<AttributeSO> attributes) {
+		this.attributes = attributes;
+	}
+
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}

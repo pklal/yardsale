@@ -31,6 +31,17 @@
   		<version>3.2.0.RELEASE</version>
   	</dependency>
   	<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-tools</artifactId>
+	<version>4.0.0-CR1</version>
+</dependency>
+            
+  	 	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-orm</artifactId>
+  		<version>3.2.0.RELEASE</version>
+  	</dependency>
+  	<dependency>
 	<groupId>org.springframework.data</groupId>
 	<artifactId>spring-data-jpa</artifactId>
 	<version>1.4.2.RELEASE</version>
@@ -45,6 +56,31 @@
   		<artifactId>ys-trans-services</artifactId>
   		<version>1.0.0</version>
   	</dependency>
+  	 	<dependency>
+  		<groupId>com.light.yardsale</groupId>
+  		<artifactId>ys-trans-domain</artifactId>
+  		<version>1.0.0</version>
+  	</dependency>
+  		<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>5.1.10</version>
+  	</dependency>
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-core</artifactId>
+	<version>4.2.8.Final</version>
+</dependency>
+<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-entitymanager</artifactId>
+	<version>4.2.8.Final</version>
+</dependency>
+ <dependency>
+	<groupId>org.slf4j</groupId>
+	<artifactId>slf4j-log4j12</artifactId>
+	<version>1.7.5</version>
+</dependency>
     </dependencies>
 
 </project>
