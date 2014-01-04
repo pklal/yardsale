@@ -1,0 +1,61 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/data/jpa 
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+
+<context:component-scan base-package="com.light"/>
+<jpa:repositories base-package="com.light.yardsale.transaction"/>
+
+    <!--  bean id="postRepository" class="com.light.yardsale.transaction.repository.PostTransactionRepository">
+        <constructor-arg type="javax.sql.DataSource" ref="dataSource"/>
+    </bean -->
+    
+     <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://localhost:3306/yardsaledb" />
+			<property name="username" value="ys_user" />
+			<property name="password" value="ys_user" />
+		</bean>
+		
+ <!-- Declare a JPA entityManagerFactory-->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
+        <property name="persistenceUnitName" value="ys-trans-domain" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
+                <property name="showSql" value="true"/>
+                 <property name="database" value="MYSQL"/>
+                 <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
+            </bean>
+        </property>
+        <property name="jpaProperties">
+ 	   <props>
+       	 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+   	 </props>
+   	 </property>
+    </bean>
+
+    <!-- Declare a transaction manager-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+   </bean> 
+    <beans profile="dev">
+      <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+			<property name="url" value="jdbc:mysql://localhost:3306/yardsaledb" />
+			<property name="username" value="ys_user" />
+			<property name="password" value="ys_user" />
+		</bean>
+    </beans>
+ 
+</beans>
