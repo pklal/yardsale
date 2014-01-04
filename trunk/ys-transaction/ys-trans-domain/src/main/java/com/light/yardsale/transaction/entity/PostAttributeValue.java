@@ -1,8 +1,13 @@
 package com.light.yardsale.transaction.entity;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigInteger;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 
 /**
@@ -13,7 +18,8 @@ import java.math.BigInteger;
 @Table(name="ys_post_attrib_values")
 @NamedQuery(name="PostAttributeValue.findAll", query="SELECT p FROM PostAttributeValue p")
 public class PostAttributeValue  {
-	private static final long serialVersionUID = 1L;
+
+	
 
 	@Column(name="attrib_code")
 	private String attribCode;
@@ -22,9 +28,24 @@ public class PostAttributeValue  {
 	private String attribVal;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="InvTab")
+	@TableGenerator(name="InvTab", table="seq_gen",
+    pkColumnName="ID_NAME", valueColumnName="ID_VAL",
+    pkColumnValue="post_attrib_id")
 	@Column(name="post_attrib_id")
 	private Long postAttribId;
+
+	@Column(name="post_id")
+	private Long postId;
+
+	
+	public Long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
 
 	public PostAttributeValue() {
 	}

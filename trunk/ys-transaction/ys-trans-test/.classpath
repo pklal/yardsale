@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.11/junit-4.11.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"/>
@@ -16,13 +18,42 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-web/3.2.0.RELEASE/spring-web-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/3.2.0.RELEASE/spring-jdbc-3.2.0.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/3.2.0.RELEASE/spring-tx-3.2.0.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-jpa/1.4.2.RELEASE/spring-data-jpa-1.4.2.RELEASE.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-commons/1.6.2.RELEASE/spring-data-commons-1.6.2.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-tools/4.0.0-CR1/hibernate-tools-4.0.0-CR1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-core/4.2.8.Final/hibernate-core-4.2.8.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/antlr/antlr/2.7.7/antlr-2.7.7.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/spec/javax/transaction/jboss-transaction-api_1.1_spec/1.0.1.Final/jboss-transaction-api_1.1_spec-1.0.1.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/common/hibernate-commons-annotations/4.0.2.Final/hibernate-commons-annotations-4.0.2.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.1/slf4j-api-1.7.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-entitymanager/4.2.8.Final/hibernate-entitymanager-4.2.8.Final.jar"/>
+	<classpathentry kind="var" path="M2_REPO/ant/ant/1.6.5/ant-1.6.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/freemarker/freemarker/2.3.8/freemarker-2.3.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/tycho/org.eclipse.jdt.core/3.8.0.v_C03/org.eclipse.jdt.core-3.8.0.v_C03.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/text/3.2.0-v20060605-1400/text-3.2.0-v20060605-1400.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/commands/3.3.0-I20070605-0010/commands-3.3.0-I20070605-0010.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.2.0-v20060603/common-3.2.0-v20060603.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/runtime/3.2.0-v20060603/runtime-3.2.0-v20060603.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/3.9.1-v20130814-1242/osgi-3.9.1-v20130814-1242.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/jobs/3.5.300-v20130429-1813/jobs-3.5.300-v20130429-1813.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/registry/3.5.301-v20130717-1549/registry-3.5.301-v20130717-1549.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/preferences/3.5.100-v20130422-1538/preferences-3.5.100-v20130422-1538.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/core/contenttype/3.4.200-v20130326-1255/contenttype-3.4.200-v20130326-1255.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/3.2.0.RELEASE/spring-orm-3.2.0.RELEASE.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-jpa/1.4.2.RELEASE/spring-data-jpa-1.4.2.RELEASE.jar" sourcepath="M2_REPO/org/springframework/data/spring-data-jpa/1.4.2.RELEASE/spring-data-jpa-1.4.2.RELEASE-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/springframework/data/spring-data-commons/1.6.2.RELEASE/spring-data-commons-1.6.2.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/slf4j/jcl-over-slf4j/1.7.1/jcl-over-slf4j-1.7.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/3.1.4.RELEASE/spring-orm-3.1.4.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-asm/3.1.4.RELEASE/spring-asm-3.1.4.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/aspectj/aspectjrt/1.7.2/aspectjrt-1.7.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/light/yardsale/ys-trans-services/1.0.0/ys-trans-services-1.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/light/yardsale/ys-trans-domain/1.0.0/ys-trans-domain-1.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.10/mysql-connector-java-5.1.10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
 	<classpathentry kind="src" path="/ys-trans-services"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
