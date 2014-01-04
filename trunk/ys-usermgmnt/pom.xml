@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+     <parent>
+    <groupId>com.light.yardsale</groupId>
+    <artifactId>ys-parent</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.light.yardsale.usermgmnt</groupId>
+    <artifactId>ys-usermgmnt-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <name>Multi Chapter Parent Project</name>
+    <modules>
+        <module>ys-usermgmnt-services</module>
+        <module>ys-usermgmnt-domain</module>
+        <!-- module>ys-webapp</module-->
+    </modules>
+</project>
