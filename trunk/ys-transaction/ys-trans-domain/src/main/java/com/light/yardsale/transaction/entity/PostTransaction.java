@@ -1,7 +1,9 @@
 package com.light.yardsale.transaction.entity;
 
 import javax.persistence.*;
+
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -14,8 +16,6 @@ import java.util.Date;
 public class PostTransaction  {
 
     
-
-	 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="created_date")
 	private Date createdDate;
@@ -55,6 +55,7 @@ public class PostTransaction  {
 	@Column(name="usr_code")
 	private String userCode;
 
+	
 	public PostTransaction() {
 	}
 

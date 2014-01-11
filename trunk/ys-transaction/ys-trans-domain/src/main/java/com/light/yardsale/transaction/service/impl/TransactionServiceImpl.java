@@ -3,12 +3,13 @@
  */
 package com.light.yardsale.transaction.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.light.yardsale.transaction.entity.PostAttributeValue;
 import com.light.yardsale.transaction.entity.PostComment;
@@ -17,18 +18,22 @@ import com.light.yardsale.transaction.exceptions.ValidationException;
 import com.light.yardsale.transaction.repository.PostAttributeValueRepository;
 import com.light.yardsale.transaction.repository.PostCommentRepository;
 import com.light.yardsale.transaction.repository.PostTransactionRepository;
+import com.light.yardsale.transaction.services.PostConstants;
 import com.light.yardsale.transaction.services.TransactionService;
 import com.light.yardsale.transaction.transferobjects.AttributeSO;
 import com.light.yardsale.transaction.transferobjects.PostCommentSO;
+import com.light.yardsale.transaction.transferobjects.PostItemSO;
 import com.light.yardsale.transaction.transferobjects.PostListSO;
 import com.light.yardsale.transaction.transferobjects.PostQuerySO;
-import com.light.yardsale.transaction.transferobjects.PostRequestSO;
+import com.light.yardsale.transaction.transferobjects.PostSummarySO;
+import com.light.yardsale.transaction.transferobjects.PostTransactionSO;
+import com.light.yardsale.transaction.transferobjects.SummarySO;
 
 /**
  * @author kiranlal
  *
  */
-@Component
+@Service
 public class TransactionServiceImpl implements TransactionService{
 
 	@Autowired
@@ -46,7 +51,7 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 
 
-	public PostRequestSO submitPost(PostRequestSO postRequestSO)
+	public PostTransactionSO submitPost(PostTransactionSO postRequestSO)
 			throws ValidationException {
 		PostTransaction trans = new PostTransaction();
 		BeanUtils.copyProperties(postRequestSO, trans);
@@ -80,8 +85,43 @@ public class TransactionServiceImpl implements TransactionService{
 	@Override
 	public PostListSO listTransactions(PostQuerySO postQuerySO)
 			throws ValidationException {
-		// TODO Auto-generated method stub
-		return null;
+		if(postQuerySO.getPostType() == null){
+			postQuerySO.setPostType(PostConstants.SELL);
+		}
+		if(postQuerySO.getItemCode() == null || postQuerySO.getItemCode().trim().equals("")){
+			throw new ValidationException("invalid Item Code");
+		}
+		List<PostTransaction> results = postRepository.findTransactions(postQuerySO.getPostType(),postQuerySO.getItemCode());
+		PostListSO postSO = new PostListSO();
+		List<PostItemSO> itemSOs = new ArrayList();
+		for (Iterator<PostTransaction> iterator = results.iterator(); iterator.hasNext();) {
+			PostTransaction postTransaction = iterator.next();
+			PostItemSO itemSO = new PostItemSO();
+			BeanUtils.copyProperties(postTransaction, itemSO);
+			itemSOs.add(itemSO);
+		}
+		postSO.setPosts(itemSOs);
+		postSO.setPageNumber(postQuerySO.getPageNumber());
+		postSO.setPageSize(postQuerySO.getPageSize());
+		return postSO;
+	}
+
+
+	@Override
+	public PostSummarySO showSummary() throws ValidationException {
+		List<Object[]> results =postRepository.findSummaryDetails();
+		System.out.println(results.size()+" Welcome to Post..."+ results);
+		PostSummarySO postSummary = new PostSummarySO();
+		List<SummarySO> summaries = new ArrayList();
+		for (Iterator<Object[]> iterator = results.iterator(); iterator.hasNext();) {
+			Object[] type = (Object[]) iterator.next();
+			SummarySO summarySO = new SummarySO();
+			summarySO.setItemCode((String) type[1]);
+			summarySO.setItemCount((Long) type[0]);
+			summaries.add(summarySO);
+		}
+		postSummary.setPostSummaries(summaries);
+		return postSummary;
 	}
 
 }
