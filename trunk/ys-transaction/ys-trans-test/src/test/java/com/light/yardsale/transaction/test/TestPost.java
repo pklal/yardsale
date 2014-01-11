@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,12 +13,14 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.light.yardsale.transaction.entity.PostComment;
 import com.light.yardsale.transaction.exceptions.ValidationException;
 import com.light.yardsale.transaction.services.TransactionService;
 import com.light.yardsale.transaction.transferobjects.AttributeSO;
 import com.light.yardsale.transaction.transferobjects.PostCommentSO;
-import com.light.yardsale.transaction.transferobjects.PostRequestSO;
+import com.light.yardsale.transaction.transferobjects.PostListSO;
+import com.light.yardsale.transaction.transferobjects.PostQuerySO;
+import com.light.yardsale.transaction.transferobjects.PostTransactionSO;
+import com.light.yardsale.transaction.transferobjects.PostSummarySO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //ApplicationContext will be loaded from "classpath:/app-config.xml"
@@ -33,6 +33,34 @@ public class TestPost {
     @Autowired
     private TransactionService transService = null;
 
+    @Test
+    public void testTransactions() {   
+    	try {
+    		PostQuerySO arg0 = new PostQuerySO();
+    		arg0.setItemCode("AUTOMOBILES");
+    		arg0.setPageNumber(1);
+    		arg0.setPageSize(3);
+    		arg0.setPostType("SELL");
+			PostListSO postList = transService.listTransactions(arg0);
+			System.out.println("-------- "+postList);
+		} catch (Exception ne) {
+			// TODO Auto-generated catch block
+			ne.printStackTrace();
+		}
+    }
+    /**
+     * Tests message.
+     */
+    @Test
+    public void testListTransactions() {   
+    	try {
+			PostSummarySO summarySO = transService.showSummary();
+			System.out.println("-------- "+summarySO);
+		} catch (Exception ne) {
+			// TODO Auto-generated catch block
+			ne.printStackTrace();
+		}
+    }
     /**
      * Tests message.
      */
@@ -45,7 +73,7 @@ public class TestPost {
       //  assertNotNull("Message is null.", msg);
         
         String expectedMessage = "Spring is fun.";
-        PostRequestSO postReqSO = new PostRequestSO();
+        PostTransactionSO postReqSO = new PostTransactionSO();
         postReqSO.setCreatedDate(Calendar.getInstance().getTime());
         postReqSO.setDetailedDesc(" 2007 old car with 20000 milage.");
         postReqSO.setItemCode("AUTOMOBILES");
