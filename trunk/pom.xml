@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.light.yardsale</groupId>
     <artifactId>ys-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
-    <name>Multi Chapter Parent Project</name>
+    <name>Yardsale Project..</name>
     <modules>
         <module>ys-usermgmnt</module>
         <module>ys-transaction</module>
